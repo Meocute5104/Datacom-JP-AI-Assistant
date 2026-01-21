@@ -1,99 +1,65 @@
-AI Japanese Proficiency Assessment Assistant (N5–N3)
-1. Problem Definition
+# AI Japanese Proficiency Assessment Assistant (N5–N3)
 
-Many Japanese learners are unsure about their current proficiency level (N5–N3) and often start learning materials that are either too easy or too difficult.
+## Overview
+This project implements the core logic of a simple AI assistant that estimates a learner’s Japanese language proficiency level (JLPT N5–N3) based on a short diagnostic test.
 
-This project aims to build a simple AI assistant that estimates a learner’s Japanese proficiency level based on a short diagnostic test and provides learning recommendations.
+The assistant analyzes the test results and provides:
+- An estimated JLPT level
+- An explanation of how the result was determined
+- A confidence score based on similarity matching
 
-2. Scope and Constraints
+The goal of this project is not to build a full-scale product, but to demonstrate problem definition, reasoning, and explainable AI logic.
 
-Target levels: JLPT N5, N4, N3
+---
 
-Test length: 15 multiple-choice questions
+## Problem Definition
+Many Japanese learners are unsure about their current proficiency level and often choose learning materials that are either too easy or too difficult.
 
-Skills evaluated:
+This project addresses that problem by helping learners **estimate their current JLPT level** using a short test and a transparent evaluation process.
 
-Vocabulary
+---
 
-Grammar
+## Scope and Constraints
+- Target levels: **JLPT N5, N4, N3**
+- Test length: short diagnostic test (conceptual: 10–15 questions)
+- Skills evaluated:
+  - Vocabulary
+  - Grammar
+  - Reading comprehension
+- Listening is excluded due to web and time constraints.
+- The system provides **estimation**, not official certification.
 
-Reading comprehension
+---
 
-Listening is excluded due to web limitations.
+## System Overview
+The system operates in the following steps:
 
-The system provides estimation, not official certification.
+1. The user completes a diagnostic test.
+2. Answers are scored by skill category.
+3. The AI assistant evaluates the results using:
+   - Rule-based evaluation
+   - Similarity scoring
+4. The system outputs:
+   - Estimated JLPT level
+   - Confidence score
+   - Explanation of the decision
 
-3. System Overview
+---
 
-User completes an online test.
+## AI Logic Design
 
-Answers are scored by category.
-
-An AI logic module evaluates the results using:
-
-Rule-based evaluation
-
-Similarity scoring
-
-The assistant outputs:
-
-Estimated JLPT level
-
-Explanation of the result
-
-Suggested next learning steps
-
-4. AI Logic Design
-4.1 Rule-based Evaluation
-
-Each JLPT level has minimum score thresholds.
-
-Example:
-
-N5: Vocabulary ≥ 60%, Grammar ≥ 50%
-
-N4: Vocabulary ≥ 70%, Grammar ≥ 60%
-
-N3: Vocabulary ≥ 75%, Grammar ≥ 70%
-
-Rules ensure the result is interpretable and explainable.
-
-4.2 Similarity Scoring
-
-Each JLPT level is represented as a skill profile vector.
+### Rule-based Evaluation
+Each JLPT level has minimum score thresholds for vocabulary and grammar.
 
 Example:
+- N5: Vocabulary ≥ 60%, Grammar ≥ 50%
+- N4: Vocabulary ≥ 70%, Grammar ≥ 60%
+- N3: Vocabulary ≥ 75%, Grammar ≥ 70%
 
-User vector = [vocabulary, grammar, reading]
-N4 profile  = [0.7, 0.6, 0.6]
+These rules ensure that higher levels are only considered when basic requirements are met.
 
+---
 
-Cosine similarity is used to determine which level best matches the user’s ability.
+### Similarity Scoring
+Each JLPT level is represented as a predefined skill profile vector:
 
-5. Result Interpretation
-
-The final level is determined by combining:
-
-Rule-based qualification
-
-Highest similarity score
-
-The assistant also explains why a certain level was chosen.
-
-6. Limitations and Bias
-
-Short tests may not fully reflect proficiency.
-
-Guessing can affect results.
-
-Learners strong in listening but weak in reading may be underestimated.
-
-7. Future Improvements
-
-Add listening section
-
-Adaptive testing
-
-Machine learning-based scoring
-
-Personalized learning paths
