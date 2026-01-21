@@ -62,4 +62,50 @@ These rules ensure that higher levels are only considered when basic requirement
 
 ### Similarity Scoring
 Each JLPT level is represented as a predefined skill profile vector:
+N5 = [0.6, 0.5, 0.4]
+N4 = [0.7, 0.6, 0.6]
+N3 = [0.8, 0.7, 0.7]
 
+The user’s performance is converted into a vector:
+
+Cosine similarity is used to measure how closely the user’s performance matches each JLPT profile.  
+The level with the highest similarity score (among rule-qualified levels) is selected.
+
+---
+
+## Decision Strategy
+The final decision combines:
+- **Rule-based filtering** (to ensure minimum competence)
+- **Similarity-based ranking** (to select the best-matching level)
+
+This hybrid approach balances interpretability and flexibility.
+
+---
+
+## Limitations and Bias
+- Short tests may not fully represent actual proficiency.
+- Guessing may inflate scores.
+- Learners strong in listening but weak in reading may be underestimated.
+- Skill profiles are manually designed and may introduce bias.
+
+These limitations are acknowledged as part of the system design.
+
+---
+
+## Technology Stack
+- Language: **Python**
+- Framework: **Flask**
+- Frontend: Simple HTML templates
+- Deployment: Local environment only
+
+---
+
+## How to Run Locally
+
+```bash
+pip install flask
+python app.py
+
+Then open:
+
+http://127.0.0.1:5000
